@@ -215,6 +215,10 @@ public class TestNGContentHandler extends DefaultHandler {
       if (allowReturnValues != null) {
         m_currentSuite.setAllowReturnValues(Boolean.valueOf(allowReturnValues));
       }
+      String stopAllWhenOccurFailure = attributes.getValue("stop-all-when-occur-failure");
+      if (stopAllWhenOccurFailure!=null) {
+         m_currentSuite.setStopAllWhenOccurFailure(Boolean.valueOf(stopAllWhenOccurFailure));
+      }
     }
     else {
       m_currentSuite.setParameters(m_currentSuiteParameters);

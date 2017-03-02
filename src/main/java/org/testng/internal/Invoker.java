@@ -26,6 +26,7 @@ import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.SkipException;
 import org.testng.SuiteRunState;
+import org.testng.SuiteRunner;
 import org.testng.TestException;
 import org.testng.TestNGException;
 import org.testng.annotations.IConfigurationAnnotation;
@@ -1223,6 +1224,11 @@ public class Invoker implements IInvoker {
                   while (invocationCount-- > 0) {
                     result.add(registerSkippedTestResult(testMethod, instance, System.currentTimeMillis(), null));
                   }
+                }
+                if ( !lastSucces
+                      && (tmpResultsIndex < 0
+                            || tmpResults.get(tmpResultsIndex).getStatus() != ITestResult.SKIP )) {
+                   SuiteRunner.setTestCaseFailed();
                 }
               }// end finally
               parametersIndex++;

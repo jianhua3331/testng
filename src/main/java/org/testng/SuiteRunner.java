@@ -42,6 +42,9 @@ public class SuiteRunner implements ISuite, Serializable, IInvokedMethodListener
   private static final long serialVersionUID = 5284208932089503131L;
 
   private static final String DEFAULT_OUTPUT_DIR = "test-output";
+  
+  private static Boolean m_isNeedQuit = false;
+  private static Boolean m_stopAllWhenOccurFailure = false;
 
   private Map<String, ISuiteResult> suiteResults = Collections.synchronizedMap(Maps.<String, ISuiteResult>newLinkedHashMap());
   private transient List<TestRunner> testRunners = Lists.newArrayList();
@@ -701,5 +704,19 @@ public class SuiteRunner implements ISuite, Serializable, IInvokedMethodListener
   @Override
   public List<ITestNGMethod> getAllMethods() {
     return allTestMethods;
+  }
+  
+  public static void setTestCaseFailed() {
+     if( m_stopAllWhenOccurFailure ) {
+        m_isNeedQuit = true;
+     }
+  }
+  
+  public static Boolean needQuit() {
+     return m_isNeedQuit;
+  }
+  
+  public static void setStopAllWhenOccurFailture( Boolean stopAllWhenOccurFailure) {
+     m_stopAllWhenOccurFailure = stopAllWhenOccurFailure;
   }
 }

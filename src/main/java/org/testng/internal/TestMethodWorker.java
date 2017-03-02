@@ -7,6 +7,7 @@ import org.testng.ITestClass;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
+import org.testng.SuiteRunner;
 import org.testng.collections.Lists;
 import org.testng.internal.thread.ThreadUtil;
 import org.testng.internal.thread.graph.IWorker;
@@ -102,6 +103,9 @@ public class TestMethodWorker implements IWorker<ITestNGMethod> {
   @Override
   public void run() {
     for (IMethodInstance testMthdInst : m_methodInstances) {
+      if(SuiteRunner.needQuit()) {
+          break;
+      }
       ITestNGMethod testMethod = testMthdInst.getMethod();
       ITestClass testClass = testMethod.getTestClass();
 

@@ -500,6 +500,9 @@ public class XmlTest implements Serializable, Cloneable {
     if (m_threadCount != -1) {
       p.setProperty("thread-count", Integer.toString(m_threadCount));
     }
+    if (m_suite.getStopAllWhenOccurFailure() == true) {
+      p.setProperty("stop-all-when-occur-failure", "true");
+    }
     if (m_groupByInstances != null) {
       XmlUtils.setProperty(p, "group-by-instances", String.valueOf(getGroupByInstances()),
           XmlSuite.DEFAULT_GROUP_BY_INSTANCES.toString());

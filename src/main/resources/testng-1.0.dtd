@@ -48,6 +48,7 @@ Cedric Beust & Alexandru Popescu
                 Class/Methods after they've failed once or just skip remaining.
 @attr  thread-count An integer giving the size of the thread pool to use
                 if you set parallel.
+@attr  stop-all-when-occur-failure Whether to stop all testcase while occur testcase failure.
 @attr  annotations  If "javadoc", TestNG will look for
                 JavaDoc annotations in your sources, otherwise it will
                 use JDK5 annotations.
@@ -69,6 +70,7 @@ Cedric Beust & Alexandru Popescu
     guice-stage (DEVELOPMENT | PRODUCTION | TOOL) "DEVELOPMENT"
     configfailurepolicy (skip | continue) "skip"
     thread-count CDATA "5"
+    stop-all-when-occur-failure (true | false) "false"
     annotations CDATA #IMPLIED
     time-out CDATA #IMPLIED
     skipfailedinvocationcounts (true | false) "false"

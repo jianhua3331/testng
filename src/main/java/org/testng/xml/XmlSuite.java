@@ -8,6 +8,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.testng.ITestObjectFactory;
+import org.testng.SuiteRunner;
 import org.testng.TestNG;
 import org.testng.collections.Lists;
 import org.testng.collections.Maps;
@@ -196,6 +197,8 @@ public class XmlSuite implements Serializable, Cloneable {
   private List<String> m_includedGroups = Lists.newArrayList();
   private List<String> m_excludedGroups = Lists.newArrayList();
   private XmlMethodSelectors m_xmlMethodSelectors;
+  
+  private Boolean m_stopAllWhenOccurFailure = false;
 
   /**
    * @return the fileName
@@ -530,6 +533,8 @@ public class XmlSuite implements Serializable, Cloneable {
         DEFAULT_CONFIG_FAILURE_POLICY.toString());
     XmlUtils.setProperty(p, "thread-count", String.valueOf(getThreadCount()),
         DEFAULT_THREAD_COUNT.toString());
+    XmlUtils.setProperty(p, "stop-all-when-occur-failure", String.valueOf(getStopAllWhenOccurFailure()),
+          "false");
     XmlUtils.setProperty(p, "data-provider-thread-count", String.valueOf(getDataProviderThreadCount()),
         DEFAULT_DATA_PROVIDER_THREAD_COUNT.toString());
     if (! DEFAULT_JUNIT.equals(m_isJUnit)) {
@@ -698,6 +703,7 @@ public class XmlSuite implements Serializable, Cloneable {
     result.setGuiceStage(getGuiceStage());
     result.setConfigFailurePolicy(getConfigFailurePolicy());
     result.setThreadCount(getThreadCount());
+    result.setStopAllWhenOccurFailure(getStopAllWhenOccurFailure());
     result.setDataProviderThreadCount(getDataProviderThreadCount());
     result.setParameters(getParameters());
     result.setVerbose(getVerbose());
@@ -1144,6 +1150,15 @@ public class XmlSuite implements Serializable, Cloneable {
       result.add(p.getName());
     }
     return result;
+  }
+  
+  public void setStopAllWhenOccurFailure(Boolean stopAllWhenOccurFailure) {
+     m_stopAllWhenOccurFailure = stopAllWhenOccurFailure;
+     SuiteRunner.setStopAllWhenOccurFailture(m_stopAllWhenOccurFailure);
+  }
+  
+  public Boolean getStopAllWhenOccurFailure() {
+     return m_stopAllWhenOccurFailure;
   }
 }
 
